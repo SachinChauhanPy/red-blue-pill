@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Pill & Blue Pill</title>
+  <link rel="icon" type="image/jpg" href="../assets/ADSC1.jpg">
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase SDK (Compat version for regular script tags) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <!-- Wrap everything in a container for background -->
+  <div class="container">
+    <!-- Floating Red Pills -->
+    <div class="red-pill"></div>
+    <div class="red-pill"></div>
+    <div class="red-pill"></div>
+    
+    <!-- Floating Blue Pills -->
+    <div class="blue-pill"></div>
+    <div class="blue-pill"></div>
+    <div class="blue-pill"></div>
+    <div class="box">
+      <!-- LOGO AT TOP CENTER -->
+      <div class="logo-container">
+        <img src="../assets/ADSC logo.png" alt="ADSC Logo" class="logo">
+      </div>
+
+      <!-- LOGIN BOX -->
+      <form class="form" id="loginForm">
+        <div class="title">
+          Red Pill & Blue Pill<br>
+          <span>Log in to continue</span>
+        </div>
+
+        <input
+          type="text"
+          id="userFirstName"
+          name="firstName"
+          placeholder="Your First Name"
+          class="input"
+          required
+        >
+
+        <input
+          type="text"
+          id="userLastName"
+          name="lastName"
+          placeholder="Your Last Name"
+          class="input"
+          required
+        >
+
+        <input
+          type="email"
+          id="userEmail"
+          name="email"
+          placeholder="Your Email ID"
+          class="input"
+          required
+        >
+
+        <button class="button-confirm">Log In →</button>
+
+        <p id="output"></p>
+      </form>
+
+      <!-- Success Message Container (Hidden by default) -->
+      <div id="successContainer" style="display: none; text-align: center; width: 100%;">
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
