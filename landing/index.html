@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
+
 <body>
   <!-- Wrap everything in a container for background -->
   <div class="container">
@@ -18,7 +20,7 @@
     <div class="red-pill"></div>
     <div class="red-pill"></div>
     <div class="red-pill"></div>
-    
+
     <!-- Floating Blue Pills -->
     <div class="blue-pill"></div>
     <div class="blue-pill"></div>
@@ -33,56 +35,28 @@
       <form class="form" id="loginForm">
         <div class="title">
           Red Pill & Blue Pill<br>
-          <span>Log in to continue</span>
+          <span>Sign up for the game</span>
         </div>
 
-        <input
-          type="text"
-          id="userFirstName"
-          name="firstName"
-          placeholder="Your First Name"
-          class="input"
-          required
-        >
+        <input type="text" id="userFirstName" name="firstName" placeholder="Your First Name" class="input" required>
 
-        <input
-          type="text"
-          id="userLastName"
-          name="lastName"
-          placeholder="Your Last Name"
-          class="input"
-          required
-        >
+        <input type="text" id="userLastName" name="lastName" placeholder="Your Last Name" class="input" required>
 
-        <input
-          type="email"
-          id="userEmail"
-          name="email"
-          placeholder="Your Email ID"
-          class="input"
-          required
-        >
+        <input type="email" id="userEmail" name="email" placeholder="Your Email ID" class="input" required>
 
 
-           <button class="button-confirm">Log In →</button>
-
-           <div style="text-align:center; margin: 18px 0 0 0;">
+        <button class="button-confirm">Sign Up →</button>
+        <div class="auth-divider" aria-hidden="true">or sign up with</div>
+        <div class="google-sso-container">
           <div id="g_id_onload"
             data-client_id="520502471805-is78f60eef4mrvdd2bj9k8u1usr4g6c2.apps.googleusercontent.com"
-            data-context="signin"
-            data-ux_mode="popup"
-            data-callback="handleGoogleSignIn"
-            data-auto_prompt="false">
+            data-context="signin" data-ux_mode="popup" data-callback="handleGoogleSignIn" data-auto_prompt="false">
           </div>
-          <div class="g_id_signin"
-            data-type="standard"
-            data-shape="rectangular"
-            data-theme="outline"
-            data-text="sign_in_with"
-            data-size="large"
-            data-logo_alignment="left">
+          <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+            data-text="continue_with" data-size="large" data-logo_alignment="left"
+            data-label="Sign up for the game">
           </div>
-           </div>
+        </div>
 
         <p id="output"></p>
       </form>
@@ -96,4 +70,5 @@
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="script.js"></script>
 </body>
+
 </html>

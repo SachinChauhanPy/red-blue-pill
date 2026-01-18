@@ -27,9 +27,10 @@ const auth = firebase.auth();
 // ========== GOOGLE SSO HANDLER ========== 
 
 document.addEventListener("DOMContentLoaded", function() {
-  if (window.google && google.accounts && google.accounts.id) {
+  var btnContainer = document.getElementById("customGoogleBtn");
+  if (window.google && google.accounts && google.accounts.id && btnContainer) {
     google.accounts.id.renderButton(
-      document.getElementById("customGoogleBtn"),
+      btnContainer,
       {
         type: "standard",
         theme: "outline",
@@ -38,9 +39,14 @@ document.addEventListener("DOMContentLoaded", function() {
         text: "signin_with",
         logo_alignment: "left",
         width: 260,
-        // You can add more style options here
       }
     );
+    btnContainer.style.display = "flex";
+  } else if (btnContainer) {
+    btnContainer.innerHTML = '<span style="color:#fff;font-size:14px;">Google Sign-In unavailable</span>';
+    btnContainer.style.display = "flex";
+    btnContainer.style.justifyContent = "center";
+    btnContainer.style.alignItems = "center";
   }
 });
 
