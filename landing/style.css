@@ -1,3 +1,35 @@
+/* Custom Google SSO Button Styles */
+.google-sso-container {
+  text-align: center;
+  margin-top: 18px;
+}
+.custom-google-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #222;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  padding: 0.75em 1.5em;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.custom-google-btn:hover {
+  background: #f5f5f5;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+}
+.google-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
 /* ===== MODERN MINIMALISTIC DARK DESIGN ===== */
 
 * {

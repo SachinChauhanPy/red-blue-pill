@@ -568,34 +568,30 @@
       // Animate the picking
       let count = 0;
       const interval = setInterval(() => {
-        const idx1 = Math.floor(Math.random() * allSignups.length);
-        let idx2 = Math.floor(Math.random() * allSignups.length);
-        while (idx2 === idx1) {
-          idx2 = Math.floor(Math.random() * allSignups.length);
+        // Shuffle for animation
+        const shuffled = allSignups.slice();
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-
-        document.getElementById("player1").innerHTML = `<span class="player-name">${allSignups[idx1].firstName}</span>`;
-        document.getElementById("player2").innerHTML = `<span class="player-name">${allSignups[idx2].firstName}</span>`;
+        document.getElementById("player1").innerHTML = `<span class="player-name">${shuffled[0].firstName}</span>`;
+        document.getElementById("player2").innerHTML = `<span class="player-name">${shuffled[1].firstName}</span>`;
 
         count++;
         if (count > 15) {
           clearInterval(interval);
-          
-          // Final selection
-          const final1 = Math.floor(Math.random() * allSignups.length);
-          let final2 = Math.floor(Math.random() * allSignups.length);
-          while (final2 === final1) {
-            final2 = Math.floor(Math.random() * allSignups.length);
+          // Final selection with Fisher-Yates shuffle
+          const finalShuffle = allSignups.slice();
+          for (let i = finalShuffle.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [finalShuffle[i], finalShuffle[j]] = [finalShuffle[j], finalShuffle[i]];
           }
-
           const player1El = document.getElementById("player1");
           const player2El = document.getElementById("player2");
-
           player1El.classList.add("filled");
           player2El.classList.add("filled");
-          player1El.innerHTML = `<span class="player-name">${allSignups[final1].fullName}</span>`;
-          player2El.innerHTML = `<span class="player-name">${allSignups[final2].fullName}</span>`;
-
+          player1El.innerHTML = `<span class="player-name">${finalShuffle[0].fullName}</span>`;
+          player2El.innerHTML = `<span class="player-name">${finalShuffle[1].fullName}</span>`;
           button.disabled = false;
           button.textContent = "🎲 Pick 2 Random Players";
         }

@@ -18,10 +18,80 @@ const GOOGLE_SHEETS_WEBHOOK_URL = ""; // Paste your Google Apps Script Web App U
 // Option 2: Zapier Webhook (Alternative - requires Zapier account)
 const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/YOUR_ZAPIER_ID/YOUR_TRIGGER_ID/"; // Replace with your actual Zapier webhook URL
 
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const auth = firebase.auth();
+
+// ========== GOOGLE SSO HANDLER ========== 
+
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.google && google.accounts && google.accounts.id) {
+    google.accounts.id.renderButton(
+      document.getElementById("customGoogleBtn"),
+      {
+        type: "standard",
+        theme: "outline",
+        size: "large",
+        shape: "rectangular",
+        text: "signin_with",
+        logo_alignment: "left",
+        width: 260,
+        // You can add more style options here
+      }
+    );
+  }
+});
+
+window.handleGoogleSignIn = function(response) {
+  // Decode JWT to get user info
+  const idToken = response.credential;
+  const base64Url = idToken.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  const user = JSON.parse(jsonPayload);
+
+  // Map Google fields to our format
+  const firstName = user.given_name || '';
+  const lastName = user.family_name || '';
+  const fullName = user.name || (firstName + ' ' + lastName);
+  const email = user.email || '';
+
+  // Visual feedback
+  const output = document.getElementById("output");
+  output.textContent = "Checking email...";
+  output.className = "";
+  const loginForm = document.getElementById("loginForm");
+  const submitBtn = loginForm ? loginForm.querySelector("button") : null;
+  if (submitBtn) submitBtn.disabled = true;
+
+  // Check for duplicates before saving
+  checkDuplicateEmail(email, (isDuplicate) => {
+    if (isDuplicate) {
+      output.textContent = "❌ This email is already registered. Please use a different email.";
+      output.className = "error";
+      if (submitBtn) submitBtn.disabled = false;
+    } else {
+      // Email is unique, proceed with signup
+      output.textContent = "Signing in...";
+      output.className = "";
+      saveData(fullName, firstName, lastName, email, () => {
+        const successMsg = "<div style='font-size: 24px; margin-bottom: 15px;'>🎉</div><div style='font-size: 20px; font-weight: 700; margin-bottom: 10px;'>Congratulation for Joining the Game!</div><div style='font-size: 16px; color: var(--text-secondary); margin-bottom: 8px;'>Welcome to the Game, " + fullName + "!</div><div style='font-size: 14px; color: var(--accent-cyan);'>You're all set and ready to go! 🚀</div>";
+        const successContainer = document.getElementById('successContainer');
+        successContainer.innerHTML = successMsg;
+        successContainer.className = 'success-message';
+        successContainer.style.display = 'block';
+        if (loginForm) loginForm.style.display = "none";
+        startFlowerAnimation(() => {
+          showResetButton();
+        });
+      });
+    }
+  });
+};
 
 const loginForm = document.getElementById("loginForm");
 const output = document.getElementById("output");

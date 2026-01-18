@@ -63,7 +63,26 @@
           required
         >
 
-        <button class="button-confirm">Log In →</button>
+
+           <button class="button-confirm">Log In →</button>
+
+           <div style="text-align:center; margin: 18px 0 0 0;">
+          <div id="g_id_onload"
+            data-client_id="520502471805-is78f60eef4mrvdd2bj9k8u1usr4g6c2.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-callback="handleGoogleSignIn"
+            data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-size="large"
+            data-logo_alignment="left">
+          </div>
+           </div>
 
         <p id="output"></p>
       </form>
@@ -74,6 +93,7 @@
     </div>
   </div>
 
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="script.js"></script>
 </body>
 </html>
